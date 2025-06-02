@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Home of Aviation | The Complete Guide to Flight</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Custom CSS for animations and effects */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .fade-in {
+            animation: fadeIn 1s ease-out forwards;
+        }
+        
+        .delay-1 { animation-delay: 0.2s; }
+        .delay-2 { animation-delay: 0.4s; }
+        .delay-3 { animation-delay: 0.6s; }
+        
+        .plane-path {
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .plane-path::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.8) 100%);
+            z-index: 1;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 0;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #3b82f6;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: -15px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #3b82f6;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        .flight-path {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: dash 5s linear forwards;
+        }
+        
+        @keyframes dash {
+            to {
+                stroke-dashoffset: 0;
+            }
+        }
+        
+        /* New branding colors */
+        .brand-blue {
+            color: #1e40af;
+        }
+        
+        .brand-blue-bg {
+            background-color: #1e40af;
+        }
+        
+        .brand-blue-border {
+            border-color: #1e40af;
+        }
+        
+        .hover-brand-blue:hover {
+            color: #1e40af;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-gray-900 text-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-home text-blue-400 text-2xl"></i>
+                <span class="text-xl font-bold">The <span class="text-blue-400">Home</span> of Aviation</span>
+            </div>
+            <div class="hidden md:flex space-x-6">
+                <a href="#history" class="hover:text-blue-400 transition">History</a>
+                <a href="#technology" class="hover:text-blue-400 transition">Technology</a>
+                <a href="#types" class="hover:text-blue-400 transition">Aircraft Types</a>
+                <a href="#careers" class="hover:text-blue-400 transition">Careers</a>
+                <a href="#future" class="hover:text-blue-400 transition">Future</a>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-800 px-4 py-2">
+            <a href="#history" class="block py-2 hover:text-blue-400 transition">History</a>
+            <a href="#technology" class="block py-2 hover:text-blue-400 transition">Technology</a>
+            <a href="#types" class="block py-2 hover:text-blue-400 transition">Aircraft Types</a>
+            <a href="#careers" class="block py-2 hover:text-blue-400 transition">Careers</a>
+            <a href="#future" class="block py-2 hover:text-blue-400 transition">Future</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="plane-path relative bg-[url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1474&q=80')] bg-cover bg-center h-screen flex items-center">
+        <div class="absolute inset-0 bg-black opacity-50"></div>
+        <div class="container mx-auto px-4 z-10 text-white">
+            <h1 class="text-4xl md:text-6xl font-bold mb-4 fade-in">Welcome to <span class="text-blue-400">The Home of Aviation</span></h1>
+            <p class="text-xl md:text-2xl mb-8 max-w-2xl fade-in delay-1">Your ultimate destination for everything about flight - from historic milestones to cutting-edge aerospace technology.</p>
+            <div class="flex space-x-4 fade-in delay-2">
+                <button class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">Explore Now</button>
+                <button class="border border-white hover:bg-white hover:text-gray-900 text-white px-6 py-3 rounded-lg font-medium transition">Take a Tour</button>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <i class="fas fa-chevron-down text-white text-2xl"></i>
+        </div>
+    </header>
+
+    <!-- History Section -->
+    <section id="history" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 fade-in">The <span class="text-blue-600">History</span> of Aviation</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto fade-in delay-1">Humanity's dream of flight has evolved dramatically over the centuries.</p>
+            </div>
+            
+            <div class="relative pl-8 timeline max-w-4xl mx-auto">
+                <!-- Timeline Items -->
+                <div class="relative mb-12 timeline-item pl-8 fade-in">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">1903</span>
+                            <h3 class="ml-4 text-xl font-semibold">The Wright Brothers' First Flight</h3>
+                        </div>
+                        <p class="text-gray-700">On December 17, 1903, Orville and Wilbur Wright achieved the first powered, sustained, and controlled airplane flight in Kitty Hawk, North Carolina. Their Wright Flyer flew for 12 seconds and covered 120 feet.</p>
+                    </div>
+                </div>
+                
+                <div class="relative mb-12 timeline-item pl-8 fade-in delay-1">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">1927</span>
+                            <h3 class="ml-4 text-xl font-semibold">Charles Lindbergh's Transatlantic Flight</h3>
+                        </div>
+                        <p class="text-gray-700">Charles Lindbergh became the first person to fly solo nonstop across the Atlantic Ocean in his monoplane, the Spirit of St. Louis. The 33.5-hour flight from New York to Paris revolutionized public perception of aviation.</p>
+                    </div>
+                </div>
+                
+                <div class="relative mb-12 timeline-item pl-8 fade-in delay-2">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">1939</span>
+                            <h3 class="ml-4 text-xl font-semibold">First Jet-Powered Aircraft</h3>
+                        </div>
+                        <p class="text-gray-700">The German Heinkel He 178 became the world's first aircraft to fly under turbojet power, ushering in the jet age. This revolutionary technology would transform air travel in the decades to come.</p>
+                    </div>
+                </div>
+                
+                <div class="relative timeline-item pl-8 fade-in delay-3">
+                    <div class="bg-gray-100 p-6 rounded-lg shadow-md">
+                        <div class="flex items-center mb-2">
+                            <span class="bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-semibold">1969</span>
+                            <h3 class="ml-4 text-xl font-semibold">Boeing 747 and the Jumbo Jet Era</h3>
+                        </div>
+                        <p class="text-gray-700">The Boeing 747, the world's first wide-body airliner, made its maiden flight. Its introduction made international air travel affordable to the masses and revolutionized the airline industry.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Technology Section -->
+    <section id="technology" class="py-20 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Aviation <span class="text-blue-600">Technology</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">The engineering marvels that make flight possible</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Card 1 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-blue-500 flex items-center justify-center">
+                        <i class="fas fa-fan text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Aerodynamics</h3>
+                        <p class="text-gray-700">The study of how air moves around objects, particularly aircraft. Key concepts include lift, drag, thrust, and weight that work together to enable flight.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 2 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-red-500 flex items-center justify-center">
+                        <i class="fas fa-cogs text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Jet Engines</h3>
+                        <p class="text-gray-700">Modern jet engines work by sucking in air, compressing it, mixing it with fuel and igniting it, then expelling the hot gases to produce thrust.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 3 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-green-500 flex items-center justify-center">
+                        <i class="fas fa-microchip text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Avionics</h3>
+                        <p class="text-gray-700">The electronic systems used on aircraft including navigation, communication, flight control, and monitoring systems that ensure safe flight operations.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 4 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-yellow-500 flex items-center justify-center">
+                        <i class="fas fa-shield-alt text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Flight Safety Systems</h3>
+                        <p class="text-gray-700">Modern aircraft include TCAS (collision avoidance), EGPWS (terrain warning), weather radar, and advanced autopilot systems to enhance safety.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 5 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-purple-500 flex items-center justify-center">
+                        <i class="fas fa-satellite-dish text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Air Traffic Control</h3>
+                        <p class="text-gray-700">The network of ground-based controllers and radar systems that manage aircraft movements to prevent collisions and ensure efficient airspace utilization.</p>
+                    </div>
+                </div>
+                
+                <!-- Card 6 -->
+                <div class="bg-white rounded-lg shadow-md overflow-hidden transition duration-300 card-hover">
+                    <div class="h-48 bg-indigo-500 flex items-center justify-center">
+                        <i class="fas fa-recycle text-white text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Sustainable Aviation</h3>
+                        <p class="text-gray-700">Emerging technologies like sustainable aviation fuels, electric propulsion, and hydrogen-powered aircraft aim to reduce aviation's environmental impact.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Aircraft Types Section -->
+    <section id="types" class="py-20 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Types of <span class="text-blue-600">Aircraft</span></h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">The diverse range of flying machines designed for different purposes</p>
+            </div>
+            
+            <div class="flex flex-col md:flex-row mb-12 bg-gray-100 rounded-lg overflow-hidden">
+                <div class="md:w-1/2 h-64 md:h-auto bg-[url('https://images.unsplash.com/photo-1556388158-158ea5ccacbd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80')] bg-cover bg-center"></div>
+                <div class="md:w-1/2 p-8">
+                    <h3 class="text-2xl font-bold mb-4">Commercial Airliners</h3>
+                    <p class="text-gray-700 mb-4">Designed to transport passengers and cargo efficiently over various distances. They range from regional jets to wide-body, long-haul aircraft.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold">Narrow-body</h4>
+                            <p class="text-sm text-gray-600">Boeing 737, Airbus A320</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Wide-body</h4>
+                            <p class="text-sm text-gray-600">Boeing 787, Airbus A350</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row mb-12 bg-gray-100 rounded-lg overflow-hidden">
+                <div class="md:w-1/2 p-8 order-2 md:order-1">
+                    <h3 class="text-2xl font-bold mb-4">General Aviation</h3>
+                    <p class="text-gray-700 mb-4">All civil aviation operations other than scheduled air services. Includes private flying, flight training, agriculture, photography, and more.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold">Single-engine</h4>
+                            <p class="text-sm text-gray-600">Cessna 172, Piper Cherokee</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Multi-engine</h4>
+                            <p class="text-sm text-gray-600">Beechcraft Baron, Piper Seneca</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-1/2 h-64 md:h-auto bg-[url('https://images.unsplash.com/photo-1606768666853-403c90a9ad06?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80')] bg-cover bg-center order-1 md:order-2"></div>
+            </div>
+            
+            <div class="flex flex-col md:flex-row bg-gray-100 rounded-lg overflow-hidden">
+                <div class="md:w-1/2 h-64 md:h-auto bg-[url('https://images.unsplash.com/photo-1581092921461-39b2f2a8b162?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1472&q=80')] bg-cover bg-center"></div>
+                <div class="md:w-1/2 p-8">
+                    <h3 class="text-2xl font-bold mb-4">Military Aircraft</h3>
+                    <p class="text-gray-700 mb-4">Designed for combat, reconnaissance, transport, and other military purposes. They often incorporate advanced technologies not found in civilian aircraft.</p>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <h4 class="font-semibold">Fighters</h4>
+                            <p class="text-sm text-gray-600">F-35, Su-35, Eurofighter</p>
+                        </div>
+                        <div>
+                            <h4 class="font-semibold">Transport</h4>
+                            <p class="text-sm text-gray-600">C-17, A400M, Il-76</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Careers Section -->
+    <section id="careers" class="py-20 bg-blue-600 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Aviation <span class="text-yellow-300">Careers</span></h2>
+                <p class="max-w-2xl mx-auto">Exciting career paths in the dynamic world of aviation</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Career 1 -->
+                <div class="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden transition duration-300 transform hover:scale-105">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-user-tie text-blue-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Airline Pilot</h3>
+                        <p class="text-gray-700 mb-4">Responsible for operating aircraft, ensuring passenger safety, and navigating flights according to regulations.</p>
+                        <div class="flex items-center text-sm text-blue-600">
+                            <span>Avg. Salary: $120,000+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Career 2 -->
+                <div class="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden transition duration-300 transform hover:scale-105">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-tools text-blue-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Aircraft Mechanic</h3>
+                        <p class="text-gray-700 mb-4">Maintains, repairs, and inspects aircraft to ensure they meet safety standards and are airworthy.</p>
+                        <div class="flex items-center text-sm text-blue-600">
+                            <span>Avg. Salary: $65,000+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Career 3 -->
+                <div class="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden transition duration-300 transform hover:scale-105">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-headset text-blue-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Air Traffic Controller</h3>
+                        <p class="text-gray-700 mb-4">Manages aircraft movements on the ground and in the air to prevent collisions and ensure efficient traffic flow.</p>
+                        <div class="flex items-center text-sm text-blue-600">
+                            <span>Avg. Salary: $130,000+</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Career 4 -->
+                <div class="bg-white text-gray-800 rounded-lg shadow-lg overflow-hidden transition duration-300 transform hover:scale-105">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-plane-departure text-blue-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2">Aerospace Engineer</h3>
+                        <p class="text-gray-700 mb-4">Designs aircraft, spacecraft, satellites, and missiles, and tests prototypes to ensure they function properly.</p>
+                        <div class="flex items-center text-sm text-blue-600">
+                            <span>Avg. Salary: $118,000+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button class="bg-white text-blue-600 hover:bg-gray-100 px-8 py-3 rounded-lg font-semibold transition">Explore More Careers</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Future of Aviation Section -->
+    <section id="future" class="py-20 bg-gray-900 text-white">
+        <div class="container mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">The <span class="text-blue-400">Future</span> of Aviation</h2>
+                <p class="max-w-2xl mx-auto text-gray-400">Innovations shaping the next generation of flight</p>
+            </div>
+            
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <h3 class="text-2xl font-bold mb-6">Emerging Technologies</h3>
+                    
+                    <div class="mb-8">
+                        <div class="flex items-start mb-4">
+                            <div class="bg-blue-500 p-2 rounded-full mr-4">
+                                <i class="fas fa-bolt text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Electric Aircraft</h4>
+                                <p class="text-gray-400">Battery-powered planes like the Alice by Eviation aim to revolutionize regional travel with zero emissions and lower operating costs.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start mb-4">
+                            <div class="bg-green-500 p-2 rounded-full mr-4">
+                                <i class="fas fa-leaf text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Sustainable Aviation Fuels</h4>
+                                <p class="text-gray-400">Biofuels made from waste materials and synthetic fuels produced with renewable energy could reduce aviation's carbon footprint by up to 80%.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="bg-purple-500 p-2 rounded-full mr-4">
+                                <i class="fas fa-rocket text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg mb-1">Hypersonic Travel</h4>
+                                <p class="text-gray-400">Companies are developing aircraft capable of Mach 5+ speeds, potentially reducing transatlantic flights to just 90 minutes.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <div class="relative">
+                        <svg viewBox="0 0 500 300" class="w-full h-auto">
+                            <path d="M50,150 Q150,50 250,150 T450,150" stroke="#3b82f6" stroke-width="3" fill="none" class="flight-path"/>
+                            <circle cx="50" cy="150" r="8" fill="#3b82f6"/>
+                            <circle cx="450" cy="150" r="8" fill="#3b82f6"/>
+                            <text x="40" y="180" fill="#fff" font-size="12">2020</text>
+                            <text x="440" y="180" fill="#fff" font-size="12">2040</text>
+                            
+                            <g transform="translate(150,50)">
+                                <circle cx="0" cy="0" r="5" fill="#10b981"/>
+                                <text x="10" y="5" fill="#fff" font-size="10">Electric</text>
+                            </g>
+                            
+                            <g transform="translate(250,150)">
+                                <circle cx="0" cy="0" r="5" fill="#3b82f6"/>
+                                <text x="10" y="5" fill="#fff" font-size="10">Autonomous</text>
+                            </g>
+                            
+                            <g transform="translate(350,100)">
+                                <circle cx="0" cy="0" r="5" fill="#8b5cf6"/>
+                                <text x="10" y="5" fill="#fff" font-size="10">Hypersonic</text>
+                            </g>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-16 bg-gray-800 rounded-lg p-8">
+                <h3 class="text-2xl font-bold mb-6 text-center">Urban Air Mobility</h3>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <div class="text-center">
+                        <div class="bg-blue-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-drone-alt text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">eVTOL Aircraft</h4>
+                        <p class="text-gray-400">Electric Vertical Takeoff and Landing vehicles promise to revolutionize urban transportation with air taxis.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-green-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-robot text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Autonomous Systems</h4>
+                        <p class="text-gray-400">Advanced AI and automation will enable self-flying aircraft for cargo and eventually passenger transport.</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="bg-purple-500 w-16 h-16 mx-auto rounded-full flex items-center justify-center mb-4">
+                            <i class="fas fa-city text-white text-2xl"></i>
+                        </div>
+                        <h4 class="font-bold mb-2">Skyports</h4>
+                        <p class="text-gray-400">Vertiports on rooftops and dedicated landing pads will form the infrastructure for urban air mobility networks.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-8">
+        <div class="container mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
+                <div>
+                    <div class="flex items-center space-x-2 mb-4">
+                        <i class="fas fa-home text-blue-400 text-2xl"></i>
+                        <span class="text-xl font-bold">The <span class="text-blue-400">Home</span> of Aviation</span>
+                    </div>
+                    <p class="text-gray-400">Your comprehensive resource for all things aviation - from historic milestones to cutting-edge aerospace technology.</p>
+                    </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Explore</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#history" class="text-gray-400 hover:text-blue-400 transition">History of Flight</a></li>
+                        <li><a href="#technology" class="text-gray-400 hover:text-blue-400 transition">Aviation Technology</a></li>
+                        <li><a href="#types" class="text-gray-400 hover:text-blue-400 transition">Aircraft Types</a></li>
+                        <li><a href="#careers" class="text-gray-400 hover:text-blue-400 transition">Aviation Careers</a></li>
+                        <li><a href="#future" class="text-gray-400 hover:text-blue-400 transition">Future of Aviation</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Resources</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition">Aviation Schools</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition">Flight Training</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition">Industry Reports</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition">Regulations</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-blue-400 transition">Safety Data</a></li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-semibold mb-4">Contact</h3>
+                    <ul class="space-y-2">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt text-blue-400 mt-1 mr-3"></i>
+                            <span class="text-gray-400">13 Minjeja street<br>Gairo, SLP 40</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt text-blue-400 mr-3"></i>
+                            <span class="text-gray-400">+255735252086</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope text-blue-400 mr-3"></i>
+                            <span class="text-gray-400">info@homeofaviation.com</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm mb-4 md:mb-0">© 2025 The Home of Aviation. All rights reserved.</p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-500 hover:text-blue-400 text-sm transition">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 text-sm transition">Terms of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-blue-400 text-sm transition">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                    
+                    // Close mobile menu if open
+                    const mobileMenu = document.getElementById('mobile-menu');
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                }
+            });
+        });
+        
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.fade-in');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (elementPosition < windowHeight - 100) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+        
+        // Run once on page load
+        animateOnScroll();
+        
+        // Run on scroll
+        window.addEventListener('scroll', animateOnScroll);
+    </script>
+</body>
+</html>
